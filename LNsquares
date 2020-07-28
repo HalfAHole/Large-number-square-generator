@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main(void) {
+#define SIZE 1005
+#define SIZE2 1004
+char c, numar[SIZE], d[SIZE][SIZE];
+int  ari[SIZE], dcnum=0, a=0, b=0, e=0, j=0, x=0;
+memset(ari, 0, SIZE2); memset(numar, 0, SIZE2); memset(d, 0, SIZE2);
+printf("Large number square calculator (limit is 500 digits).\nType \'e\' at end of number\n");
+for (dcnum=1; dcnum<=SIZE2 || c=='\n'; dcnum++) {c=getchar(); numar[dcnum]=c-'0';
+	if (c=='\n') {dcnum--;}
+	if ((c=='e') || dcnum>SIZE) { numar[dcnum]='\0'; dcnum--; break;}}
+printf("Your number: "); for (j=1; j<=dcnum; j++) {printf("%d", numar[j]);}	printf("\n");
+printf("Number of digits = %d\n", dcnum);
+for (a=1, b=dcnum; a<=dcnum; a++, b--) {ari[a]=numar[b];}									//flip array
+for (a=1; a<=dcnum; a++) {numar[a]=ari[a];} for (j=1; j<=dcnum; j++) {ari[j]=0;}
+
+dcnum*=2;
+for (j=1; j<=dcnum; j++) {for (b=1; b<=dcnum; b++) {ari[b]=0; d[b][j]=numar[b]*numar[j];}}
+e=0; for (a=1; a<=dcnum; a++) {e++;
+for (b=1, j=e; j>=1, b<=dcnum; b++, j--){ ari[a]=ari[a]+d[b][j];}}
+for (j=1; j<=dcnum; j++) {if (ari[j]>=10) {x=ari[j]; ari[j]=ari[j]%10; ari[j+1]=ari[j+1]+(x/10); }}
+printf("\n");
+for (j=dcnum; j>=1; j--) {if (ari[j]==0) {dcnum--;} if (ari[j]!=0) {break;}}
+for(j=dcnum; j>=1; j--) {printf("%d", ari[j]);}
+printf("\nNumber of digits = %d\n", dcnum);
+
+return (0);}
